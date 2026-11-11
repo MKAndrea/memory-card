@@ -1,0 +1,340 @@
+/* Contenitore Principale */
+.game-container {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #f1f5f9;
+}
+
+/* Header */
+.game-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-bottom: 1.2rem;
+}
+
+/* Barra Controlli & Menu Selezione */
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.select-custom {
+  background: #1e293b;
+  color: #f8fafc;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.select-custom:hover,
+.select-custom:focus {
+  border-color: #6366f1;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: #6366f1;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #334155;
+  color: white;
+}
+
+/* Tabellone Punteggio 2 Giocatori */
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.player-card {
+  background: #1e293b;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  min-width: 140px;
+  transition: all 0.25s ease;
+}
+
+.player-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  color: #cbd5e1;
+}
+
+.player-card .score {
+  font-size: 1.1rem;
+}
+
+/* Colori specifici giocatori nel tabellone */
+.player-card.player-1 {
+  border-left: 4px solid #38bdf8;
+}
+
+.player-card.player-1.active {
+  border-color: #38bdf8;
+  background: #0f2744;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+  transform: scale(1.05);
+}
+
+.player-card.player-2 {
+  border-left: 4px solid #f472b6;
+}
+
+.player-card.player-2.active {
+  border-color: #f472b6;
+  background: #3b1227;
+  box-shadow: 0 0 16px rgba(244, 114, 182, 0.45);
+  transform: scale(1.05);
+}
+
+.vs-badge {
+  font-weight: 800;
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+/* Statistiche Singolo */
+.single-stats {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  margin-bottom: 1.2rem;
+}
+
+/* Banner di Vittoria */
+.game-over-banner {
+  background: #065f46;
+  border: 2px solid #10b981;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(0.99); }
+  to { transform: scale(1.02); }
+}
+
+/* Griglia dinamica delle Carte */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Griglia a 6 colonne se ci sono 20 o 24 carte */
+.card-grid.count-20,
+.card-grid.count-24 {
+  grid-template-columns: repeat(6, 1fr);
+  max-width: 780px;
+  margin: 1rem auto 0 auto;
+}
+
+/* Carta con animazione 3D */
+.card {
+  aspect-ratio: 1 / 1;
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.4s ease-in-out;
+  transform-style: preserve-3d;
+  border-radius: 12px;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  user-select: none;
+}
+
+/* Retro della carta (coperta) */
+.card-back {
+  background: #1e293b;
+  border: 2px solid #475569;
+  font-size: 1.8rem;
+  transform: rotateY(0deg);
+}
+
+.card:hover .card-back {
+  border-color: #818cf8;
+}
+
+/* Fronte standard della carta (scoperta) */
+.card-front {
+  background: #312e81;
+  border: 2px solid #6366f1;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+}
+
+.card-img {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.card-desc {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #c7d2fe;
+  margin-top: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ======================================================== */
+/* COLORI DELLE COPPIE INDOVINATE PER CIASCUN GIOCATORE     */
+/* ======================================================== */
+
+/* 🔵 Giocatore 1: Blu / Celeste Elettrico */
+.card.matched-p1 .card-front {
+  background: linear-gradient(135deg, #0369a1, #0284c7);
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+}
+
+.card.matched-p1 .card-desc {
+  color: #e0f2fe;
+}
+
+/* 🔴 Giocatore 2: Fucsia / Rosa Acceso */
+.card.matched-p2 .card-front {
+  background: linear-gradient(135deg, #be185d, #db2777);
+  border: 2px solid #f472b6;
+  box-shadow: 0 0 14px rgba(244, 114, 182, 0.5);
+}
+
+.card.matched-p2 .card-desc {
+  color: #fce7f3;
+}
+
+/* Verde per la modalità Singolo */
+.card.matched .card-front {
+  background: #064e3b;
+  border: 2px solid #10b981;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+}
+
+/* Badge nell'angolino per indicare G1 o G2 */
+.player-tag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 6px;
+  color: white;
+}
+
+.player-tag.p1 {
+  background-color: #0284c7;
+  border: 1px solid #7dd3fc;
+}
+
+.player-tag.p2 {
+  background-color: #be185d;
+  border: 1px solid #fbcfe8;
+}
+
+/* Responsive per tablet e smartphone */
+@media (max-width: 680px) {
+  .card-grid.count-20,
+  .card-grid.count-24 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .controls-row {
+    flex-direction: column;
+  }
+  .card-grid {
+    gap: 0.5rem;
+  }
+  .card-img {
+    font-size: 1.8rem;
+  }
+  .card-back {
+    font-size: 1.4rem;
+  }
+}
